@@ -86,7 +86,17 @@ int main(){
                             inet_ntoa(dst.sin_addr), ntohs(tcp->dest));
                 }
                 break;
-        }
+        } 
+            /*UDP */
+            case 17: {
+                struct udphdr *udp = (void *)iph + iph->ih1 * 4;
+                fprintf(f, "UDP     | %-15s | %-6d | %-15s | %-6d | Len=%d\n",
+                        inet_ntoa(src.sin_addr), ntohs(udp->source),
+                        inet_ntoa(dst.sin_addr), ntohs(udp->dest),
+                        ntohs(udp->len));
+                break;
+            }
+            
     }
 
     fclose(f);
