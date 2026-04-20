@@ -72,7 +72,7 @@ int main(){
             case 6: {
                 struct tcphdr*tcp = (void*)iph + iph->ihl*4;
 
-                fprintf(f,"TCP | %-15s | %-6d | %-15s | %-6d |SYN=%d ACK=%d\n",
+                fprintf(f,"TCP     | %-15s | %-6d | %-15s | %-6d |SYN=%d ACK=%d\n",
                         inet_ntoa(src.sin_addr), ntohs(tcp->source),
                         inet_ntoa(dst.sin_addr), ntohs(tcp->dest),
                         tcp->syn, tcp->ack;
@@ -81,7 +81,7 @@ int main(){
                 int payload_len = len-(payload-buffer);
 
                 if(payload_len > 0 && (memcmp(payload,"GET",3) == 0 || memcmp(paylaod,"POST",4) == 0)){
-                    fprintf(f,"HTTP |%-15s|%-6d|%-15s|%-6d| HTTP Request\n",
+                    fprintf(f,"HTTP    |%-15s|%-6d|%-15s|%-6d| HTTP Request\n",
                             inet_ntoa(src.sin_addr), ntohs(tcp->source),
                             inet_ntoa(dst.sin_addr), ntohs(tcp->dest));
                 }
