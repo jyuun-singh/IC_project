@@ -53,8 +53,21 @@ int main(){
             continue;
         }
 
+        /*IPv6*/
+        if(ntohs(eth->h_proto)==0x86DD){
+            fprintf(f,"IPv6    | (IPv6 src)      |   -   | (IPv6 dst)      |   -   | IPv6 Packet\n");
+            continue;
+        }
+        /*IPv4*/
+        if(ntohs(eth->h_proto)!=ETH_P_IP)
+            continue;
 
-        Switch (iph->protocol) {
+        struct iphdr*iph=(struct iphdr*)(buffer + sizeof(structethhdr));
+        struct sockaddr_in_src,dst;
+        src.sin_addr.s_addr=iph->saddr;
+        dst.sin_addr.s_addr=iph->daddr;
+
+        switch (iph->protocol) {
             
         }
     }
