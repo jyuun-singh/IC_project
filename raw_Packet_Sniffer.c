@@ -96,6 +96,30 @@ int main(){
                         ntohs(udp->len));
                 break;
             }
+            /*ICMP */
+        case 1: {
+            struct icmphdr *icmp = (void *)iph + iph->ihl * 4;
+
+            fprintf(f, "ICMP    | %-15s |   -   | %-15s |   -   | Type=%d Code=%d\n",
+                    inet_ntoa(src.sin_addr), inet_ntoa(dst.sin_addr),
+                    icmp->type, icmp->code);
+            break;
+        }
+
+        /* IGMP */
+        case 2: {
+            fprintf(f, "IGMP    | %-15s |   -   | %-15s |   -   | IGMP Message\n",
+                    inet_ntoa(src.sin_addr), inet_ntoa(dst.sin_addr));
+            break;
+        }
+
+        default:
+            fprintf(f, "OTHER(%d) | %-15s |   -   | %-15s |   -   | Skipped\n",
+                    iph->protocol,
+                    inet_ntoa(src.sin_addr),
+                    inet_ntoa(dst.sin_addr));
+        }
+    }
             
     }
 
