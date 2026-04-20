@@ -120,8 +120,6 @@ int main(){
                     inet_ntoa(dst.sin_addr));
         }
     }
-            
-    }
 
     fclose(f);
     close(sock);
